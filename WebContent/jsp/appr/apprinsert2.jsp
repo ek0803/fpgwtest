@@ -3,6 +3,8 @@
 <c:set var="root" value="${pageContext.request.contextPath }"/>
 <!DOCTYPE html>
 <html lang="en">
+<script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
+  <script>tinymce.init({ selector:'textarea' });</script>
 
 <script type="text/javascript">
 
@@ -40,7 +42,7 @@
                 </div>
                 
                 <div class="panel-heading bg-white border-none" style="margin-bottom: 20px;">
-                   	<h4><span class="icon-notebook icons"></span> 정기휴가계
+                   	<h4><span class="icon-notebook icons"></span> 기안서
                    		<select>
 	                   		<option onclick="location.href='${root }/jsp/appr/apprinsert.jsp'"> 정기휴가계</option>
 	                   		<option onclick="location.href='${root }/jsp/appr/apprinsert2.jsp'"> 기안서</option>
@@ -260,143 +262,13 @@
                    					<table style="margin-left: 30px; width: 97%;">
                    						<tbody>
                    							<tr>
-                   								<td style="width: 12%; text-align: center;">기간</td>
-	                   							<td colspan="3">
-	                   								<select style="width: 100px;">
-		                                    			<option>선택</option>
-		                                    				<c:forEach var="year" begin="1900" end="2100" step="1">
-		                                    					<c:choose>
-		                                    						<c:when test="${year eq sessionScope.userDetailInfo.strHire_YYYY }">
-		                                    							<option value="${year }" selected="selected">${year }</option>
-		                                    						</c:when>
-		                                    							
-		                                    						<c:otherwise>
-		                                    							<option value="${year }">${year }</option>	
-		                                    						</c:otherwise>
-		                                    					</c:choose>
-	                                    					</c:forEach>
-		                                  			</select>
-		                                  			년
-		                                  			<select style="width: 100px;">
-		                                    			<option>선택</option>
-		                                    				<c:forEach var="month" begin="1" end="12" step="1">
-		                                    					<c:if test="${month < 10 }">
-		                                    						<c:set var="month" value="0${month }"/>
-		                                    					</c:if>
-		                                    					
-		                                    					<c:choose>
-		                                    						<c:when test="${month eq sessionScope.userDetailInfo.strHire_MM }">
-		                                    							<option value="${month }" selected="selected">${month }</option>
-		                                    						</c:when>
-		                                    							
-		                                    						<c:otherwise>
-		                                    							<option value="${month }">${month }</option>	
-		                                    						</c:otherwise>
-		                                    					</c:choose>
-		                                    				</c:forEach>
-		                                  			</select>
-		                                  			월
-		                                  			<select style="width: 100px;">
-		                                    			<option>선택</option>
-		                                    				<c:forEach var="date" begin="1" end="31" step="1">
-		                                    					<c:if test="${date < 10 }">
-		                                    						<c:set var="date" value="0${date }"/>
-		                                    					</c:if>
-		                                    					
-		                                    					<c:choose>
-		                                    						<c:when test="${date eq sessionScope.userDetailInfo.strHire_DD }">
-		                                    							<option value="${date }" selected="selected">${date }</option>
-		                                    						</c:when>
-		                                    							
-		                                    						<c:otherwise>
-		                                    							<option value="${date }">${date }</option>	
-		                                    						</c:otherwise>
-		                                    					</c:choose>
-		                                    				</c:forEach>
-		                                  			</select>
-		                                  			일 ~ 
-		                                  			<select style="width: 100px;">
-		                                    			<option>선택</option>
-		                                    				<c:forEach var="year" begin="1900" end="2100" step="1">
-		                                    					<c:choose>
-		                                    						<c:when test="${year eq sessionScope.userDetailInfo.strHire_YYYY }">
-		                                    							<option value="${year }" selected="selected">${year }</option>
-		                                    						</c:when>
-		                                    							
-		                                    						<c:otherwise>
-		                                    							<option value="${year }">${year }</option>	
-		                                    						</c:otherwise>
-		                                    					</c:choose>
-	                                    					</c:forEach>
-		                                  			</select>
-		                                  			년
-		                                  			<select style="width: 100px;">
-		                                    			<option>선택</option>
-		                                    				<c:forEach var="month" begin="1" end="12" step="1">
-		                                    					<c:if test="${month < 10 }">
-		                                    						<c:set var="month" value="0${month }"/>
-		                                    					</c:if>
-		                                    					
-		                                    					<c:choose>
-		                                    						<c:when test="${month eq sessionScope.userDetailInfo.strHire_MM }">
-		                                    							<option value="${month }" selected="selected">${month }</option>
-		                                    						</c:when>
-		                                    							
-		                                    						<c:otherwise>
-		                                    							<option value="${month }">${month }</option>	
-		                                    						</c:otherwise>
-		                                    					</c:choose>
-		                                    				</c:forEach>
-		                                  			</select>
-		                                  			월
-		                                  			<select style="width: 100px;">
-		                                    			<option>선택</option>
-		                                    				<c:forEach var="date" begin="1" end="31" step="1">
-		                                    					<c:if test="${date < 10 }">
-		                                    						<c:set var="date" value="0${date }"/>
-		                                    					</c:if>
-		                                    					
-		                                    					<c:choose>
-		                                    						<c:when test="${date eq sessionScope.userDetailInfo.strHire_DD }">
-		                                    							<option value="${date }" selected="selected">${date }</option>
-		                                    						</c:when>
-		                                    							
-		                                    						<c:otherwise>
-		                                    							<option value="${date }">${date }</option>	
-		                                    						</c:otherwise>
-		                                    					</c:choose>
-		                                    				</c:forEach>
-		                                  			</select>
-		                                  			일
-	                   							</td>
+                   								<td style="width: 12%; text-align: center;"> <textarea name="content" rows="20">내용을 입력하세요.</textarea></td>
+	                   							
                    							</tr>
-                   							<tr>
-                   								<td style="width: 12%; text-align: center;">사유</td>
-	                   							<td colspan="3">
-	                   								<textarea rows="7" cols="" style="width: 100%"></textarea>
-	                   							</td>
-                   							</tr>
-                   							<tr>
-                   								<td style="width: 12%; text-align: center;">행선지</td>
-	                   							<td colspan="3">
-	                   								<input type="text" style="width: 100%">
-	                   							</td>
-                   							</tr>
-                   							<tr>
-                   								<td style="width: 12%; text-align: center;">연락처</td>
-	                   							<td colspan="3">
-	                   								<input type="text" style="width: 100%">
-	                   							</td>
-                   							</tr>
-                   							<tr>
-                   								<td style="width: 12%; text-align: center;">대체근무자</td>
-	                   							<td colspan="3">
-	                   								<a href=""><i class="fa fa-plus-square"></i></a>
-	                   								<label style="width: 100%;" id="apprname1" name="apprname1">대리 양돈의</label>
-	                   								<input type="hidden" id="apprcode1" name="apprcode1">
-	                   								
-	                   							</td>
-                   							</tr>
+                   							
+                   							
+                   							
+                   							
                    						</tbody>
                    					</table>
                    					

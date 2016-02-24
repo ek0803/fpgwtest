@@ -11,6 +11,29 @@
 		var modal = window.showModalDialog("${root }/jspc/popup/organizationchart.jsp", "organization", "dialogWidth:400px;dialogHeight:500px;");
 
 	}
+	
+	$(document).ready( function() {
+		  // 3자리마다 콤마찌기...
+		})
+		 
+		 
+	function fn_addComma(chknum){
+		num = chknum.value;
+		num = num.split(',').join('');
+		var arr = num.split('.');
+		var num = new Array();
+		for (i = 0; i <= arr[0].length-1; i++) {
+			num[i] = arr[0].substr(arr[0].length-1-i,1);
+			if(i%3 == 0 && i != 0) num[i] += ',';
+		}
+		num = num.reverse().join('');
+		if (!arr[1]) chknum.value = num; else chknum.value = num+'.'+arr[1];
+		}
+	
+	function hap(hap){
+		hap = document.f.Field2.value.replace(/\,/g,'')*document.f.Field4.value.replace(/\,/g,'');
+		document.f.Field5.value = hap;
+	}
 </script>
 
           <!-- start: content -->
@@ -40,14 +63,14 @@
                 </div>
                 
                 <div class="panel-heading bg-white border-none" style="margin-bottom: 20px;">
-                   	<h4><span class="icon-notebook icons"></span> 정기휴가계
+                   	<h4><span class="icon-notebook icons"></span> 발주서
                    		<select>
 	                   		<option onclick="location.href='${root }/jsp/appr/apprinsert.jsp'"> 정기휴가계</option>
 	                   		<option onclick="location.href='${root }/jsp/appr/apprinsert2.jsp'"> 기안서</option>
 	                   		<option onclick="location.href='${root }/jsp/appr/apprinsert3.jsp'"> 발주서</option>
 	                   		<option onclick="location.href='${root }/jsp/appr/apprinsert4.jsp'"> 출장보고서</option>
                    		</select>
-                   	</h4>
+                   	</h4>	
                 </div>
 
 					<!-- start : 메뉴 디자인 구성하는 위치 -->
@@ -56,7 +79,7 @@
 					<div class="col-md-10">
 						<div class="panel-heading bg-white border-none">
                    			<div class="panel-body">
-                   				<form action="${root }/user/update.html" method="post" enctype="application/x-www-form-urlencoded">
+                   				<form name="f" action="${root }/user/update.html" method="post" enctype="application/x-www-form-urlencoded">
                    					<div style="border-bottom: 1px dashed #BDBDBD; margin-bottom: 10px;">
 	                   					<h4>결재정보</h4>
 	                   				</div>
@@ -259,144 +282,119 @@
                    					
                    					<table style="margin-left: 30px; width: 97%;">
                    						<tbody>
-                   							<tr>
-                   								<td style="width: 12%; text-align: center;">기간</td>
-	                   							<td colspan="3">
-	                   								<select style="width: 100px;">
-		                                    			<option>선택</option>
-		                                    				<c:forEach var="year" begin="1900" end="2100" step="1">
-		                                    					<c:choose>
-		                                    						<c:when test="${year eq sessionScope.userDetailInfo.strHire_YYYY }">
-		                                    							<option value="${year }" selected="selected">${year }</option>
-		                                    						</c:when>
-		                                    							
-		                                    						<c:otherwise>
-		                                    							<option value="${year }">${year }</option>	
-		                                    						</c:otherwise>
-		                                    					</c:choose>
-	                                    					</c:forEach>
-		                                  			</select>
-		                                  			년
-		                                  			<select style="width: 100px;">
-		                                    			<option>선택</option>
-		                                    				<c:forEach var="month" begin="1" end="12" step="1">
-		                                    					<c:if test="${month < 10 }">
-		                                    						<c:set var="month" value="0${month }"/>
-		                                    					</c:if>
-		                                    					
-		                                    					<c:choose>
-		                                    						<c:when test="${month eq sessionScope.userDetailInfo.strHire_MM }">
-		                                    							<option value="${month }" selected="selected">${month }</option>
-		                                    						</c:when>
-		                                    							
-		                                    						<c:otherwise>
-		                                    							<option value="${month }">${month }</option>	
-		                                    						</c:otherwise>
-		                                    					</c:choose>
-		                                    				</c:forEach>
-		                                  			</select>
-		                                  			월
-		                                  			<select style="width: 100px;">
-		                                    			<option>선택</option>
-		                                    				<c:forEach var="date" begin="1" end="31" step="1">
-		                                    					<c:if test="${date < 10 }">
-		                                    						<c:set var="date" value="0${date }"/>
-		                                    					</c:if>
-		                                    					
-		                                    					<c:choose>
-		                                    						<c:when test="${date eq sessionScope.userDetailInfo.strHire_DD }">
-		                                    							<option value="${date }" selected="selected">${date }</option>
-		                                    						</c:when>
-		                                    							
-		                                    						<c:otherwise>
-		                                    							<option value="${date }">${date }</option>	
-		                                    						</c:otherwise>
-		                                    					</c:choose>
-		                                    				</c:forEach>
-		                                  			</select>
-		                                  			일 ~ 
-		                                  			<select style="width: 100px;">
-		                                    			<option>선택</option>
-		                                    				<c:forEach var="year" begin="1900" end="2100" step="1">
-		                                    					<c:choose>
-		                                    						<c:when test="${year eq sessionScope.userDetailInfo.strHire_YYYY }">
-		                                    							<option value="${year }" selected="selected">${year }</option>
-		                                    						</c:when>
-		                                    							
-		                                    						<c:otherwise>
-		                                    							<option value="${year }">${year }</option>	
-		                                    						</c:otherwise>
-		                                    					</c:choose>
-	                                    					</c:forEach>
-		                                  			</select>
-		                                  			년
-		                                  			<select style="width: 100px;">
-		                                    			<option>선택</option>
-		                                    				<c:forEach var="month" begin="1" end="12" step="1">
-		                                    					<c:if test="${month < 10 }">
-		                                    						<c:set var="month" value="0${month }"/>
-		                                    					</c:if>
-		                                    					
-		                                    					<c:choose>
-		                                    						<c:when test="${month eq sessionScope.userDetailInfo.strHire_MM }">
-		                                    							<option value="${month }" selected="selected">${month }</option>
-		                                    						</c:when>
-		                                    							
-		                                    						<c:otherwise>
-		                                    							<option value="${month }">${month }</option>	
-		                                    						</c:otherwise>
-		                                    					</c:choose>
-		                                    				</c:forEach>
-		                                  			</select>
-		                                  			월
-		                                  			<select style="width: 100px;">
-		                                    			<option>선택</option>
-		                                    				<c:forEach var="date" begin="1" end="31" step="1">
-		                                    					<c:if test="${date < 10 }">
-		                                    						<c:set var="date" value="0${date }"/>
-		                                    					</c:if>
-		                                    					
-		                                    					<c:choose>
-		                                    						<c:when test="${date eq sessionScope.userDetailInfo.strHire_DD }">
-		                                    							<option value="${date }" selected="selected">${date }</option>
-		                                    						</c:when>
-		                                    							
-		                                    						<c:otherwise>
-		                                    							<option value="${date }">${date }</option>	
-		                                    						</c:otherwise>
-		                                    					</c:choose>
-		                                    				</c:forEach>
-		                                  			</select>
-		                                  			일
-	                   							</td>
+                   							<tr height="30px">
+                   								<td style="width: 20%; text-align: center;">품명</td>
+	                   							<td style="width: 15%; text-align: center;">발주수량</td>
+	                   							<td style="width: 15%; text-align: center;">규격</td>
+	                   							<td style="width: 15%; text-align: center;">단가</td>
+	                   							<td style="width: 15%; text-align: center;">금액</td>
+	                   							<td style="width: 20%; text-align: center;">비고</td>
                    							</tr>
-                   							<tr>
-                   								<td style="width: 12%; text-align: center;">사유</td>
-	                   							<td colspan="3">
-	                   								<textarea rows="7" cols="" style="width: 100%"></textarea>
-	                   							</td>
+                   							<tr height="30px">
+                   								<td style="width: 20%; text-align: center;"><input type="text" name="Field1" style='width:90%; text-align:center; '></td>
+                   								<td style="width: 15%; text-align: center;"><input type="text" name="Field2" style='width:90%; text-align:center; ' onkeyup='fn_addComma(this);'></td>
+                   								<td style="width: 15%; text-align: center;"><input type="text" name="Field3" style='width:90%; text-align:center; '></td>
+                   								<td style="width: 15%; text-align: center;"><input type="text" name="Field4" style='width:90%; text-align:center; ' onkeyup='fn_addComma(this);' onblur="hap(this)"></td>
+                   								<td style="width: 15%; text-align: center;"><input type="text" name="Field5" style='width:90%; text-align:center; ' onkeyup='fn_addComma(this);' readonly='readonly'></td>
+                   								<td style="width: 20%; text-align: center;"><input type="text" name="Field6" style='width:90%; text-align:center; '></td>
                    							</tr>
-                   							<tr>
-                   								<td style="width: 12%; text-align: center;">행선지</td>
-	                   							<td colspan="3">
-	                   								<input type="text" style="width: 100%">
-	                   							</td>
+                   							<tr height="30px">
+                   								<td style="width: 20%; text-align: center;"><input type="text" name="Field11" style='width:90%; text-align:center; '></td>
+                   								<td style="width: 15%; text-align: center;"><input type="text" name="Field12" style='width:90%; text-align:center; ' onkeyup='fn_addComma(this);'></td>
+                   								<td style="width: 15%; text-align: center;"><input type="text" name="Field13" style='width:90%; text-align:center; '></td>
+                   								<td style="width: 15%; text-align: center;"><input type="text" name="Field14" style='width:90%; text-align:center; ' onkeyup='fn_addComma(this);'></td>
+                   								<td style="width: 15%; text-align: center;"><input type="text" name="Field15" style='width:90%; text-align:center; ' onkeyup='fn_addComma(this);' readonly='readonly'></td>
+                   								<td style="width: 20%; text-align: center;"><input type="text" name="Field16" style='width:90%; text-align:center; '></td>
                    							</tr>
-                   							<tr>
-                   								<td style="width: 12%; text-align: center;">연락처</td>
-	                   							<td colspan="3">
-	                   								<input type="text" style="width: 100%">
-	                   							</td>
+                   							<tr height="30px">
+                   								<td style="width: 20%; text-align: center;"><input type="text" name="Field21" style='width:90%; text-align:center; '></td>
+                   								<td style="width: 15%; text-align: center;"><input type="text" name="Field22" style='width:90%; text-align:center; ' onkeyup='fn_addComma(this);'></td>
+                   								<td style="width: 15%; text-align: center;"><input type="text" name="Field23" style='width:90%; text-align:center; '></td>
+                   								<td style="width: 15%; text-align: center;"><input type="text" name="Field24" style='width:90%; text-align:center; ' onkeyup='fn_addComma(this);'></td>
+                   								<td style="width: 15%; text-align: center;"><input type="text" name="Field25" style='width:90%; text-align:center; ' onkeyup='fn_addComma(this);' readonly='readonly'></td>
+                   								<td style="width: 20%; text-align: center;"><input type="text" name="Field26" style='width:90%; text-align:center; '></td>
                    							</tr>
-                   							<tr>
-                   								<td style="width: 12%; text-align: center;">대체근무자</td>
-	                   							<td colspan="3">
-	                   								<a href=""><i class="fa fa-plus-square"></i></a>
-	                   								<label style="width: 100%;" id="apprname1" name="apprname1">대리 양돈의</label>
-	                   								<input type="hidden" id="apprcode1" name="apprcode1">
-	                   								
-	                   							</td>
+                   							<tr height="30px">
+                   								<td style="width: 20%; text-align: center;"><input type="text" name="Field31" style='width:90%; text-align:center; '></td>
+                   								<td style="width: 15%; text-align: center;"><input type="text" name="Field32" style='width:90%; text-align:center; ' onkeyup='fn_addComma(this);'></td>
+                   								<td style="width: 15%; text-align: center;"><input type="text" name="Field33" style='width:90%; text-align:center; '></td>
+                   								<td style="width: 15%; text-align: center;"><input type="text" name="Field34" style='width:90%; text-align:center; ' onkeyup='fn_addComma(this);'></td>
+                   								<td style="width: 15%; text-align: center;"><input type="text" name="Field35" style='width:90%; text-align:center; ' onkeyup='fn_addComma(this);' readonly='readonly'></td>
+                   								<td style="width: 20%; text-align: center;"><input type="text" name="Field36" style='width:90%; text-align:center; '></td>
                    							</tr>
+                   							<tr height="30px">
+                   								<td style="width: 20%; text-align: center;"><input type="text" name="Field41" style='width:90%; text-align:center; '></td>
+                   								<td style="width: 15%; text-align: center;"><input type="text" name="Field42" style='width:90%; text-align:center; ' onkeyup='fn_addComma(this);'></td>
+                   								<td style="width: 15%; text-align: center;"><input type="text" name="Field43" style='width:90%; text-align:center; '></td>
+                   								<td style="width: 15%; text-align: center;"><input type="text" name="Field44" style='width:90%; text-align:center; ' onkeyup='fn_addComma(this);'></td>
+                   								<td style="width: 15%; text-align: center;"><input type="text" name="Field45" style='width:90%; text-align:center; ' onkeyup='fn_addComma(this);' readonly='readonly'></td>
+                   								<td style="width: 20%; text-align: center;"><input type="text" name="Field46" style='width:90%; text-align:center; '></td>
+                   							</tr>
+                   							<tr height="30px">
+                   								<td style="width: 20%; text-align: center;"><input type="text" name="Field51" style='width:90%; text-align:center; '></td>
+                   								<td style="width: 15%; text-align: center;"><input type="text" name="Field52" style='width:90%; text-align:center; ' onkeyup='fn_addComma(this);'></td>
+                   								<td style="width: 15%; text-align: center;"><input type="text" name="Field53" style='width:90%; text-align:center; '></td>
+                   								<td style="width: 15%; text-align: center;"><input type="text" name="Field54" style='width:90%; text-align:center; ' onkeyup='fn_addComma(this);'></td>
+                   								<td style="width: 15%; text-align: center;"><input type="text" name="Field55" style='width:90%; text-align:center; ' onkeyup='fn_addComma(this);' readonly='readonly'></td>
+                   								<td style="width: 20%; text-align: center;"><input type="text" name="Field56" style='width:90%; text-align:center; '></td>
+                   							</tr>
+                   							<tr height="30px">
+                   								<td style="width: 20%; text-align: center;"><input type="text" name="Field61" style='width:90%; text-align:center; '></td>
+                   								<td style="width: 15%; text-align: center;"><input type="text" name="Field62" style='width:90%; text-align:center; ' onkeyup='fn_addComma(this);'></td>
+                   								<td style="width: 15%; text-align: center;"><input type="text" name="Field63" style='width:90%; text-align:center; '></td>
+                   								<td style="width: 15%; text-align: center;"><input type="text" name="Field64" style='width:90%; text-align:center; ' onkeyup='fn_addComma(this);'></td>
+                   								<td style="width: 15%; text-align: center;"><input type="text" name="Field65" style='width:90%; text-align:center; ' onkeyup='fn_addComma(this);' readonly='readonly'></td>
+                   								<td style="width: 20%; text-align: center;"><input type="text" name="Field66" style='width:90%; text-align:center; '></td>
+                   							</tr>
+                   							<tr height="30px">
+                   								<td style="width: 20%; text-align: center;"><input type="text" name="Field71" style='width:90%; text-align:center; '></td>
+                   								<td style="width: 15%; text-align: center;"><input type="text" name="Field72" style='width:90%; text-align:center; ' onkeyup='fn_addComma(this);'></td>
+                   								<td style="width: 15%; text-align: center;"><input type="text" name="Field73" style='width:90%; text-align:center; '></td>
+                   								<td style="width: 15%; text-align: center;"><input type="text" name="Field74" style='width:90%; text-align:center; ' onkeyup='fn_addComma(this);'></td>
+                   								<td style="width: 15%; text-align: center;"><input type="text" name="Field75" style='width:90%; text-align:center; ' onkeyup='fn_addComma(this);' readonly='readonly'></td>
+                   								<td style="width: 20%; text-align: center;"><input type="text" name="Field76" style='width:90%; text-align:center; '></td>
+                   							</tr>
+                   							<tr height="30px">
+                   								<td style="width: 20%; text-align: center;"><input type="text" name="Field81" style='width:90%; text-align:center; '></td>
+                   								<td style="width: 15%; text-align: center;"><input type="text" name="Field82" style='width:90%; text-align:center; ' onkeyup='fn_addComma(this);'></td>
+                   								<td style="width: 15%; text-align: center;"><input type="text" name="Field83" style='width:90%; text-align:center; '></td>
+                   								<td style="width: 15%; text-align: center;"><input type="text" name="Field84" style='width:90%; text-align:center; ' onkeyup='fn_addComma(this);'></td>
+                   								<td style="width: 15%; text-align: center;"><input type="text" name="Field85" style='width:90%; text-align:center; ' onkeyup='fn_addComma(this);' readonly='readonly'></td>
+                   								<td style="width: 20%; text-align: center;"><input type="text" name="Field86" style='width:90%; text-align:center; '></td>
+                   							</tr>
+                   							<tr height="30px">
+                   								<td style="width: 20%; text-align: center;"><input type="text" name="Field91" style='width:90%; text-align:center; '></td>
+                   								<td style="width: 15%; text-align: center;"><input type="text" name="Field92" style='width:90%; text-align:center; ' onkeyup='javascript:fn_addComma(this);'></td>
+                   								<td style="width: 15%; text-align: center;"><input type="text" name="Field93" style='width:90%; text-align:center; '></td>
+                   								<td style="width: 15%; text-align: center;"><input type="text" name="Field94" style='width:90%; text-align:center; ' onkeyup='javascript:fn_addComma(this);'></td>
+                   								<td style="width: 15%; text-align: center;"><input type="text" name="Field95" style='width:90%; text-align:center; ' onkeyup='javascript:fn_addComma(this);' readonly='readonly'></td>
+                   								<td style="width: 20%; text-align: center;"><input type="text" name="Field96" style='width:90%; text-align:center; '></td>
+                   							</tr>
+                   							<tr height="30px">
+                   								<td style="width: 20%; text-align: center;"><input type="text" name="Field101" style='width:90%; text-align:center; '></td>
+                   								<td style="width: 15%; text-align: center;"><input type="text" name="Field102" style='width:90%; text-align:center; ' onkeyup='javascript:fn_addComma(this);'></td>
+                   								<td style="width: 15%; text-align: center;"><input type="text" name="Field103" style='width:90%; text-align:center; '></td>
+                   								<td style="width: 15%; text-align: center;"><input type="text" name="Field104" style='width:90%; text-align:center; ' onkeyup='javascript:fn_addComma(this);'></td>
+                   								<td style="width: 15%; text-align: center;"><input type="text" name="Field105" style='width:90%; text-align:center; ' onkeyup='javascript:fn_addComma(this);' readonly='readonly'></td>
+                   								<td style="width: 20%; text-align: center;"><input type="text" name="Field106" style='width:90%; text-align:center; '></td>
+                   							</tr>
+                   							<tr height="30px">
+                   								<td style="width: 20%; text-align: center;" colspan="3">소 계</td>
+                   								<td style="width: 20%; text-align: center;" colspan="3"><input type="text" name="RField1" style='width:90%; text-align:center; ' readonly='readonly' onkeyup='javascript:fn_addComma(this);'></td>
+                   							</tr>
+                   							<tr height="30px">
+                   								<td style="width: 20%; text-align: center;" colspan="3">세 액</td>
+                   								<td style="width: 20%; text-align: center;" colspan="3"><input type="text" name="RField2" style='width:90%; text-align:center; ' readonly='readonly' onkeyup='javascript:fn_addComma(this);'></td>
+                   							</tr>
+                   							<tr height="30px">
+                   								<td style="width: 20%; text-align: center;" colspan="3">합 계(VAT 포함)</td>
+                   								<td style="width: 20%; text-align: center;" colspan="3"><input type="text" name="RField3" style='width:90%; text-align:center; ' readonly='readonly' onkeyup='javascript:fn_addComma(this);'></td>
+                   							</tr>
+                   							<tr height="150px">
+                   								<td style="text-align: center;">특이사항</td>
+                   								<td colspan="5"><textarea name="TField1" style='width:100%;height:150px;'></textarea></td>
+                   							</tr>
+
                    						</tbody>
                    					</table>
                    					

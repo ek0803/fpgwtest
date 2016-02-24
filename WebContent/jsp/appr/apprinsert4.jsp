@@ -40,13 +40,13 @@
                 </div>
                 
                 <div class="panel-heading bg-white border-none" style="margin-bottom: 20px;">
-                   	<h4><span class="icon-notebook icons"></span> 정기휴가계
-                   		<select>
-	                   		<option onclick="location.href='${root }/jsp/appr/apprinsert.jsp'"> 정기휴가계</option>
-	                   		<option onclick="location.href='${root }/jsp/appr/apprinsert2.jsp'"> 기안서</option>
-	                   		<option onclick="location.href='${root }/jsp/appr/apprinsert3.jsp'"> 발주서</option>
-	                   		<option onclick="location.href='${root }/jsp/appr/apprinsert4.jsp'"> 출장보고서</option>
-                   		</select>
+                   	<h4><span class="icon-notebook icons"></span> 출장보고서
+                   			<select>
+		                   		<option onclick="location.href='${root }/jsp/appr/apprinsert.jsp'"> 정기휴가계</option>
+		                   		<option onclick="location.href='${root }/jsp/appr/apprinsert2.jsp'"> 기안서</option>
+		                   		<option onclick="location.href='${root }/jsp/appr/apprinsert3.jsp'"> 발주서</option>
+		                   		<option onclick="location.href='${root }/jsp/appr/apprinsert4.jsp'"> 출장보고서</option>
+                   			</select>
                    	</h4>
                 </div>
 
@@ -371,15 +371,15 @@
 	                   							</td>
                    							</tr>
                    							<tr>
-                   								<td style="width: 12%; text-align: center;">사유</td>
+                   								<td style="width: 12%; text-align: center;">출장지</td>
 	                   							<td colspan="3">
-	                   								<textarea rows="7" cols="" style="width: 100%"></textarea>
+	                   								<input type="text" style="width: 100%">
 	                   							</td>
                    							</tr>
                    							<tr>
-                   								<td style="width: 12%; text-align: center;">행선지</td>
+                   								<td style="width: 12%; text-align: center;">출장목적</td>
 	                   							<td colspan="3">
-	                   								<input type="text" style="width: 100%">
+	                   								<textarea rows="3" cols="" style="width: 100%"></textarea>
 	                   							</td>
                    							</tr>
                    							<tr>
@@ -397,6 +397,13 @@
 	                   								
 	                   							</td>
                    							</tr>
+                   							<tr>
+                   								<td style="width: 12%; text-align: center;">기타</td>
+	                   							<td colspan="3">
+	                   								<textarea rows="7" cols="" style="width: 100%"></textarea>
+	                   							</td>
+                   							</tr>
+
                    						</tbody>
                    					</table>
                    					
