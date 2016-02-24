@@ -29,7 +29,7 @@
 						</td>
 					</tr>
 					<tr>
-						<td align="right">비밀번호</td>
+						<td align="right">비밀 번호</td>
 						<td>
 							<input type="password" id="pwd" name="pwd" value="kitri">
 						</td>
