@@ -15,9 +15,9 @@
 	<bean id="dataSource"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource"
 		p:driverClassName="oracle.jdbc.driver.OracleDriver"
-		p:url="jdbc:oracle:thin:@192.168.14.25:1521:XE"
-		p:username="kitri"
-		p:password="kitri"/>
+		p:url="jdbc:oracle:thin:@localhost:1521:XE"
+		p:username="hr"
+		p:password="hr"/>
 		
 	<bean id="SqlSessionFactory"
 		class="org.mybatis.spring.SqlSessionFactoryBean"
@@ -29,6 +29,7 @@
 				<value>classpath:com/kitri/fpgw/config/mybatis/Schedule.xml</value>
 				<value>classpath:com/kitri/fpgw/config/mybatis/Board.xml</value>
 				<value>classpath:com/kitri/fpgw/config/mybatis/Rant.xml</value>
+				<value>classpath:com/kitri/fpgw/config/mybatis/Appr.xml</value>
 			</list>
 		</property>
 		
@@ -39,6 +40,7 @@
 				<value>com.kitri.fpgw.dao.ScheduleDao</value>
 				<value>com.kitri.fpgw.dao.BoardDao</value>
 				<value>com.kitri.fpgw.dao.RantDao</value>
+				<value>com.kitri.fpgw.dao.ApprDao</value>
 			</list>
 		</property>
 	</bean>
